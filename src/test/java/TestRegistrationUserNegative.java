@@ -1,6 +1,8 @@
 import constants.RandomTestUser;
+import constants.request.RequestAuthorizationUser;
 import constants.request.RequestDeleteUser;
 import constants.request.RequestRegistrationUser;
+import constants.user.UserAuthorizationFields;
 import constants.user.UserRegistrationFields;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.junit4.DisplayName;
@@ -23,6 +25,7 @@ public class TestRegistrationUserNegative {
     private UserRegistrationFields userRegistrationFields;
     private RequestDeleteUser requestDeleteUser;
     private RequestRegistrationUser requestRegistrationUser;
+    private RequestAuthorizationUser requestAuthorizationUser;
     private String token;
 
     @Before
@@ -49,15 +52,16 @@ public class TestRegistrationUserNegative {
         objRegistrationPage = new RegistrationPage(driver);
         requestDeleteUser = new RequestDeleteUser();
         requestRegistrationUser = new RequestRegistrationUser();
+        requestAuthorizationUser = new RequestAuthorizationUser();
         userRegistrationFields = RandomTestUser.getRandomRegistration();
-        token = requestRegistrationUser.registerUser(userRegistrationFields).path(ACCESS_TOKEN);
     }
 
+    //    Если этот юзер всё-таки создастся ( то есть тест словит баг), его тоже нужно удалить. Нужно исправить
     @Test
     @DisplayName("Registration user already exists")
     public void checkRegistrationUserAlreadyExists() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingTheRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
+        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objRegistrationPage.getRegistrationText());
     }
 
@@ -65,7 +69,7 @@ public class TestRegistrationUserNegative {
     @DisplayName("Registration user not valid password")
     public void checkRegistrationUserNotValidPassword() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingTheRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getEmail(), PASSWORD_USER);
+        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getEmail(), PASSWORD_USER);
         Assert.assertTrue(objRegistrationPage.getRegistrationValidateText());
     }
 
@@ -73,7 +77,7 @@ public class TestRegistrationUserNegative {
     @DisplayName("Registration user not password")
     public void checkRegistrationUserNotPassword() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingTheRegistrationForm(EMAIL_USER, userRegistrationFields.getEmail(), "");
+        objRegistrationPage.completingRegistrationForm(EMAIL_USER, userRegistrationFields.getEmail(), "");
         Assert.assertTrue(objRegistrationPage.getRegistrationText());
     }
 
@@ -81,13 +85,16 @@ public class TestRegistrationUserNegative {
     @DisplayName("Registration user not name")
     public void checkRegistrationUserNotName() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingTheRegistrationForm(userRegistrationFields.getEmail(), "", userRegistrationFields.getPassword());
+        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), "", userRegistrationFields.getPassword());
         Assert.assertTrue(objRegistrationPage.getRegistrationText());
     }
 
     @After
     public void quit() {
-        requestDeleteUser.deleteUser(token);
+        token = requestAuthorizationUser.authorizationUser(UserAuthorizationFields.from(userRegistrationFields)).path(ACCESS_TOKEN);
+        if (token != null && !token.isBlank()) {
+            requestDeleteUser.deleteUser(token);
+        }
         driver.quit();
     }
 }

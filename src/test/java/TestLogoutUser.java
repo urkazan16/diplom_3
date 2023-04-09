@@ -61,8 +61,8 @@ public class TestLogoutUser {
         token = requestRegistrationUser.registerUser(userRegistrationFields).path(ACCESS_TOKEN);
         objMainPage.openMain();
         objMainPage.clickButtonSignIn();
-        objAuthorizationPage.completingTheAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
-        objMainPage.getManiText();
+        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objMainPage.getMainText();
     }
 
     @Test
@@ -75,7 +75,9 @@ public class TestLogoutUser {
 
     @After
     public void quit() {
-        requestDeleteUser.deleteUser(token);
+        if (token != null && !token.isBlank()) {
+            requestDeleteUser.deleteUser(token);
+        }
         driver.quit();
     }
 }

@@ -24,7 +24,7 @@ public class PersonalAreaPage {
     }
 
     public void isWaitOrderDisplayed(By waitElement) {
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
+        WebDriverWait elementWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 }

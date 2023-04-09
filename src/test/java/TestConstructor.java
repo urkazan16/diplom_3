@@ -44,7 +44,7 @@ public class TestConstructor {
         objMainPage.openMain();
         objMainPage.clickTabToppings();
         objMainPage.clickTabRolls();
-        Assert.assertTrue(objMainPage.getActiveTab());
+        Assert.assertTrue(objMainPage.getActiveTabRolls());
     }
 
     @Test
@@ -52,7 +52,8 @@ public class TestConstructor {
     public void checkConstructorTabSauces() {
         objMainPage.openMain();
         objMainPage.clickTabSauces();
-        Assert.assertTrue(objMainPage.getActiveTab());
+        Assert.assertTrue(objMainPage.getActiveTabSauces());
+
     }
 
     @Test
@@ -60,8 +61,7 @@ public class TestConstructor {
     public void checkConstructorTabToppings() {
         objMainPage.openMain();
         objMainPage.clickTabToppings();
-        objMainPage.clickTabRolls();
-        Assert.assertTrue(objMainPage.getActiveTab());
+        Assert.assertTrue(objMainPage.getActiveTabTopping());
     }
 
     @After

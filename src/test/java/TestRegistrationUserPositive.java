@@ -60,7 +60,7 @@ public class TestRegistrationUserPositive {
     @DisplayName("Registration user")
     public void checkRegistrationUser() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingTheRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
+        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objAuthorizationPage.getAuthorizationText());
     }
 
@@ -68,7 +68,9 @@ public class TestRegistrationUserPositive {
     @After
     public void quit() {
         token = requestAuthorizationUser.authorizationUser(UserAuthorizationFields.from(userRegistrationFields)).path(ACCESS_TOKEN);
-        requestDeleteUser.deleteUser(token);
+        if (token != null && !token.isBlank()) {
+            requestDeleteUser.deleteUser(token);
+        }
         driver.quit();
     }
 }

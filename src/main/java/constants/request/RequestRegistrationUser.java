@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class RequestRegistrationUser extends Header {
     private static final String USER_URL = BASE_URL + "auth/";
 
-    @Step("Create user {userRegistrationFields}")
+    @Step("Registration user {userRegistrationFields}")
     public Response registerUser(UserRegistrationFields userRegistrationFields) {
         return given()
                 .spec(getRequestSpec())

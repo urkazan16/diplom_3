@@ -24,8 +24,8 @@ public class AuthorizationPage {
     }
 
     public void isWaitOrderDisplayed(By waitElement) {
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
+        WebDriverWait elementWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
     public void setEmail(String email) {
@@ -40,7 +40,7 @@ public class AuthorizationPage {
         driver.findElement(ElementsAuthorizationPage.BUTTON_AUTH).click();
     }
 
-    public void completingTheAuthorizationForm(String email, String password) {
+    public void completingAuthorizationForm(String email, String password) {
         setEmail(email);
         setPassword(password);
         clickAuthorizationButton();

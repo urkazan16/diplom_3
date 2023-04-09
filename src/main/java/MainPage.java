@@ -17,7 +17,7 @@ public class MainPage {
         driver.get(ElementsMainPage.URL);
     }
 
-    public boolean getManiText() {
+    public boolean getMainText() {
         isWaitPageDisplayed(ElementsMainPage.TEXT_HEADER_MAIN);
         return driver.findElement(ElementsMainPage.TEXT_HEADER_MAIN).isDisplayed();
     }
@@ -51,18 +51,33 @@ public class MainPage {
     }
 
     public void isWaitPageDisplayed(By waitElement) {
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
+        WebDriverWait elementWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
     public void isWaitTabDisplayed(By waitElement) {
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(8));
-        wait2.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
+        WebDriverWait elementWait = new WebDriverWait(driver, Duration.ofSeconds(8));
+        elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
     public boolean getActiveTab() {
         isWaitTabDisplayed(ElementsMainPage.ACTIVE_TAB);
         return driver.findElement(ElementsMainPage.ACTIVE_TAB).isDisplayed();
+    }
+
+    public boolean getActiveTabTopping() {
+        isWaitTabDisplayed(ElementsMainPage.ACTIVE_TAB_TOPPING);
+        return driver.findElement(ElementsMainPage.ACTIVE_TAB_TOPPING).isDisplayed();
+    }
+
+    public boolean getActiveTabSauces() {
+        isWaitTabDisplayed(ElementsMainPage.ACTIVE_TAB_SAUCES);
+        return driver.findElement(ElementsMainPage.ACTIVE_TAB_SAUCES).isDisplayed();
+    }
+
+    public boolean getActiveTabRolls() {
+        isWaitTabDisplayed(ElementsMainPage.ACTIVE_TAB_ROLLS);
+        return driver.findElement(ElementsMainPage.ACTIVE_TAB_ROLLS).isDisplayed();
     }
 
 }

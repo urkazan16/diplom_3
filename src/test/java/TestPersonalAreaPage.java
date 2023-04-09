@@ -60,8 +60,8 @@ public class TestPersonalAreaPage {
         token = requestRegistrationUser.registerUser(userRegistrationFields).path(ACCESS_TOKEN);
         objMainPage.openMain();
         objMainPage.clickButtonSignIn();
-        objAuthorizationPage.completingTheAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
-        objMainPage.getManiText();
+        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objMainPage.getMainText();
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TestPersonalAreaPage {
     public void checkClickConstructorAuthUser() {
         objMainPage.openMain();
         objMainPage.clickAuthorizationButtonConstructor();
-        Assert.assertTrue(objMainPage.getManiText());
+        Assert.assertTrue(objMainPage.getMainText());
     }
 
     @Test
@@ -85,12 +85,14 @@ public class TestPersonalAreaPage {
     public void checkClickLogoAuthUser() {
         objMainPage.openMain();
         objMainPage.clickLogo();
-        Assert.assertTrue(objMainPage.getManiText());
+        Assert.assertTrue(objMainPage.getMainText());
     }
 
     @After
     public void quit() {
-        requestDeleteUser.deleteUser(token);
+        if (token != null && !token.isBlank()) {
+            requestDeleteUser.deleteUser(token);
+        }
         driver.quit();
     }
 }
