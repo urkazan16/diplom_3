@@ -14,14 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import static constants.RandomTestUser.EMAIL_USER;
-import static constants.RandomTestUser.PASSWORD_USER;
+import static constants.RandomTestUser.*;
 import static constants.request.Header.ACCESS_TOKEN;
 
 public class TestRegistrationUserNegative {
     private WebDriver driver;
     private RegistrationPage objRegistrationPage;
-
     private UserRegistrationFields userRegistrationFields;
     private RequestDeleteUser requestDeleteUser;
     private RequestRegistrationUser requestRegistrationUser;
@@ -56,20 +54,21 @@ public class TestRegistrationUserNegative {
         userRegistrationFields = RandomTestUser.getRandomRegistration();
     }
 
-    //    Если этот юзер всё-таки создастся ( то есть тест словит баг), его тоже нужно удалить. Нужно исправить
     @Test
     @DisplayName("Registration user already exists")
     public void checkRegistrationUserAlreadyExists() {
+        requestRegistrationUser.registerUser(userRegistrationFields);
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
-        Assert.assertTrue(objRegistrationPage.getRegistrationText());
+        objRegistrationPage.completeRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
+        Assert.assertTrue(objRegistrationPage.getAlreadyExists());
     }
 
     @Test
     @DisplayName("Registration user not valid password")
     public void checkRegistrationUserNotValidPassword() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getEmail(), PASSWORD_USER);
+        userRegistrationFields.setPassword(PASSWORD_USER_INVALID);
+        objRegistrationPage.completeRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objRegistrationPage.getRegistrationValidateText());
     }
 
@@ -77,7 +76,8 @@ public class TestRegistrationUserNegative {
     @DisplayName("Registration user not password")
     public void checkRegistrationUserNotPassword() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingRegistrationForm(EMAIL_USER, userRegistrationFields.getEmail(), "");
+        userRegistrationFields.setPassword("");
+        objRegistrationPage.completeRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objRegistrationPage.getRegistrationText());
     }
 
@@ -85,7 +85,8 @@ public class TestRegistrationUserNegative {
     @DisplayName("Registration user not name")
     public void checkRegistrationUserNotName() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), "", userRegistrationFields.getPassword());
+        userRegistrationFields.setName("");
+        objRegistrationPage.completeRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objRegistrationPage.getRegistrationText());
     }
 

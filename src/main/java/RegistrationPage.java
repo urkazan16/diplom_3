@@ -51,12 +51,17 @@ public class RegistrationPage {
         return driver.findElement(ElementsRegistrationPage.TEXT_REGISTER).isDisplayed();
     }
 
+    public boolean getAlreadyExists() {
+        isWaitOrderDisplayed(ElementsRegistrationPage.ALREADY_EXISTS);
+        return driver.findElement(ElementsRegistrationPage.ALREADY_EXISTS).isDisplayed();
+    }
+
     public void isWaitOrderDisplayed(By waitElement) {
         WebDriverWait elementWait = new WebDriverWait(driver, Duration.ofSeconds(3));
         elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
-    public void completingRegistrationForm(String email, String name, String password) {
+    public void completeRegistrationForm(String email, String name, String password) {
         setEmail(email);
         setName(name);
         setPassword(password);

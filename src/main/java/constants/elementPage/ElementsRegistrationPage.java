@@ -10,4 +10,5 @@ public class ElementsRegistrationPage {
     public static final By BUTTON_REGISTER = By.xpath(".//button[text()='Зарегистрироваться']");
     public static final By TEXT_REGISTER = By.xpath(".//h2[text()='Регистрация']");
     public static final By INCORRECT_PASSWORD = By.xpath(".//p[text()='Некорректный пароль']");
+    public static final By ALREADY_EXISTS = By.xpath(".//p[text()='Такой пользователь уже существует']");
 }

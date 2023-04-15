@@ -10,10 +10,10 @@ public class RequestDeleteUser extends Header {
 
     private static final String USER_URL = BASE_URL + "auth/";
 
-    @Step("Delete user {idUser}")
-    public ValidatableResponse deleteUser(String idUser) {
+    @Step("Delete user {userId}")
+    public ValidatableResponse deleteUser(String userId) {
         return given()
-                .spec(getRequestAuthSpec(idUser))
+                .spec(getRequestAuthSpec(userId))
                 .delete(USER_URL + "user/").then();
     }
 }

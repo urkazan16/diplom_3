@@ -60,12 +60,11 @@ public class TestAuthorizationUser {
         token = requestRegistrationUser.registerUser(userRegistrationFields).path(ACCESS_TOKEN);
     }
 
-
     @Test
     @DisplayName("Authorization user")
     public void checkAuthorizationUser() {
         objAuthorizationPage.openAuthorization();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         Assert.assertTrue(objMainPage.getMainText());
     }
 
@@ -74,7 +73,7 @@ public class TestAuthorizationUser {
     public void checkAuthorizationUserButtonSignIn() {
         objMainPage.openMain();
         objMainPage.clickButtonSignIn();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         Assert.assertTrue(objMainPage.getMainText());
     }
 
@@ -83,7 +82,7 @@ public class TestAuthorizationUser {
     public void checkAuthorizationUserButtonPersonalArea() {
         objMainPage.openMain();
         objMainPage.clickAuthorizationButtonPersonalArea();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         Assert.assertTrue(objMainPage.getMainText());
     }
 
@@ -92,7 +91,7 @@ public class TestAuthorizationUser {
     public void checkAuthorizationUserRegistrationForm() {
         objRegistrationPage.openRegistration();
         objRegistrationPage.clickRegistrationButtonSignIn();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         Assert.assertTrue(objMainPage.getMainText());
     }
 
@@ -101,10 +100,9 @@ public class TestAuthorizationUser {
     public void checkAuthorizationUserForgotPasswordForm() {
         objForgotPasswordPage.openForgotPassword();
         objRegistrationPage.clickRegistrationButtonSignIn();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         Assert.assertTrue(objMainPage.getMainText());
     }
-
 
     @After
     public void quit() {

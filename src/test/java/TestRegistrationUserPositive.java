@@ -60,7 +60,7 @@ public class TestRegistrationUserPositive {
     @DisplayName("Registration user")
     public void checkRegistrationUser() {
         objRegistrationPage.openRegistration();
-        objRegistrationPage.completingRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
+        objRegistrationPage.completeRegistrationForm(userRegistrationFields.getEmail(), userRegistrationFields.getName(), userRegistrationFields.getPassword());
         Assert.assertTrue(objAuthorizationPage.getAuthorizationText());
     }
 

@@ -40,7 +40,7 @@ public class AuthorizationPage {
         driver.findElement(ElementsAuthorizationPage.BUTTON_AUTH).click();
     }
 
-    public void completingAuthorizationForm(String email, String password) {
+    public void completeAuthorizationForm(String email, String password) {
         setEmail(email);
         setPassword(password);
         clickAuthorizationButton();

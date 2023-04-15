@@ -61,7 +61,7 @@ public class TestLogoutUser {
         token = requestRegistrationUser.registerUser(userRegistrationFields).path(ACCESS_TOKEN);
         objMainPage.openMain();
         objMainPage.clickButtonSignIn();
-        objAuthorizationPage.completingAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
+        objAuthorizationPage.completeAuthorizationForm(userAuthorizationFields.getEmail(), userAuthorizationFields.getPassword());
         objMainPage.getMainText();
     }
 
